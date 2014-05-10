@@ -140,6 +140,7 @@ void plSceneObject::delModifier(size_t idx) {
     plKey key = fModifiers[idx];
     fModifiers.erase(fModifiers.begin() + idx);
 
+    key->clearCallbacks();
     if (key.isLoaded()) {
         if (key->getObj()->isStub()) {
             plDebug::Warning("WARNING:  Removing STUB modifier from SceneObject");
@@ -153,6 +154,7 @@ void plSceneObject::delModifier(size_t idx) {
 void plSceneObject::clearModifiers() {
     for (size_t i = 0; i < fModifiers.size(); i++) {
         plKey key = fModifiers[i];
+        key->clearCallbacks();
         if (key.isLoaded()) {
             if (key->getObj()->isStub()) {
                 plDebug::Warning("WARNING:  Removing STUB modifier from SceneObject");
